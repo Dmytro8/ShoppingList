@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>MDB Webpack Starter</title>
+    <title>About</title>
     <!-- Favicon -->
     <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
@@ -22,7 +22,7 @@
 
   <body>
     <!-- Start your project here-->
-    <div class="container">
+    <!-- <div class="container">
       <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
         <div class="text-center">
           <img
@@ -33,13 +33,75 @@
           <p class="pb-5">MDB Team</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- End your project here-->
-
+    <header class="header container">
+      <h1 class="header__text"><i class="fas fa-shopping-bag"></i> <span>Shopping</span>List</h1>
+      <nav>
+        <button type="button" class="btn custom-button"><a href="index.html">Add item</a></button>
+        <button type="button" class="btn custom-button">
+          <a href="shopping-list.html">Your list</a>
+        </button>
+      </nav>
+    </header>
+    <main class="container">
+      <div class="message success">
+        <span>Your product was successfully added</span>
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="content-wrapper">
+        <h2>Add product</h2>
+        <form>
+          <div class="field">
+            <label for="product">Name</label>
+            <input type="text" name="product" placeholder="Enter a name of product" />
+          </div>
+          <div class="field">
+            <label for="product">Units / Weight</label>
+            <div class="field__unitsOrWeight">
+              <input type="number" min="0" name="product" placeholder="0" />
+              <select name="" id="">
+                <option value="unit">Unit</option>
+                <option value="weight">Weight</option>
+              </select>
+            </div>
+          </div>
+          <div class="select field">
+            <label for="category">Select a category for Your product</label>
+            <select name="category">
+              <option value="" disabled selected>Choose a category</option>
+              <optgroup label="Food">
+                <option value="Breakfast & Cereal">Breakfast & Cereal</option>
+                <option value="Bread & Bakery">Bread & Bakery</option>
+                <option value="Dairy, Eggs & Cheese">Dairy, Eggs & Cheese</option>
+                <option value="Meat & Seafood">Meat & Seafood</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Grains, Pasta & Sides">Grains, Pasta & Sides</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Cookies, Snacks & Candy">Cookies, Snacks & Candy</option>
+                <option value="Condiments/Spices & Bake">Condiments/Spices & Bake</option>
+                <option value="Canned Goods & Soups">Canned Goods & Soups</option>
+                <option value="Beer, Wine & Spirits">Beer, Wine & Spirits</option>
+              </optgroup>
+              <optgroup label="Others">
+                <option value="Paper Products">Paper Products</option>
+                <option value="Cleaning Supplies">Paper Products</option>
+                <option value="Health & Beauty">Health & Beauty</option>
+                <option value="Pet Care">Pet Care</option>
+                <option value="Pharmacy">Pharmacy</option>
+              </optgroup>
+            </select>
+          </div>
+          <button type="button" class="btn custom-button">
+            Add product
+          </button>
+        </form>
+      </div>
+    </main>
   </body>
   <!-- Main js file -->
   <script type="text/javascript" src="js/index.min.js"></script>
   <!-- Custom scripts -->
   <script type="text/javascript"></script>
-
 </html>

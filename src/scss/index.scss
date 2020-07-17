@@ -1,1 +1,136 @@
 @import '~mdb-ui-kit/css/mdb.min.css';
+@import './_vars.scss';
+@import './initial.scss';
+
+.custom-button {
+  background-color: $accentColor;
+}
+
+.header {
+  display: grid;
+  justify-items: center;
+  padding: 20px 0;
+  &__text {
+    span {
+      color: $accentColor;
+    }
+  }
+  nav {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 20px;
+    padding: 20px 0;
+    align-items: center;
+    .btn {
+      width: 150px;
+      height: 50px;
+      a {
+        font-size: 14px;
+      }
+    }
+  }
+}
+main {
+  .message {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    display: grid;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    color: white;
+    grid-auto-flow: column;
+    & > :nth-child(1) {
+      justify-self: start;
+    }
+    & > :nth-child(2) {
+      justify-self: end;
+      cursor: pointer;
+    }
+    &.success {
+      background-color: $success;
+    }
+    &.hidden {
+      display: none;
+    }
+    &.error {
+      background-color: $error;
+    }
+  }
+  .select {
+    position: relative;
+    width: 100%;
+    height: unset;
+    &::after {
+      content: '\25BC';
+      color: white;
+      position: absolute;
+      background: orange;
+      top: 25px;
+      right: 0;
+      height: 40px;
+      padding: 0.4rem 0.8rem;
+      pointer-events: none;
+      transition: all 0.3 ease;
+    }
+    select {
+      color: $accentColor;
+      width: inherit;
+      height: inherit;
+      padding: 0 5px;
+      height: 40px;
+    }
+  }
+  .content-wrapper {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 3vw;
+    h2 {
+      padding: 10px 0;
+    }
+    form {
+      display: grid;
+      gap: 10px;
+      .field {
+        display: grid;
+        label {
+          color: black;
+        }
+        input {
+          height: 40px;
+        }
+        input,
+        select {
+          padding-left: 5px;
+          color: $accentColor;
+        }
+        &__unitsOrWeight {
+          display: grid;
+          grid-auto-flow: column;
+          gap: 50px;
+          grid-template-columns: minmax(50px, 2fr) minmax(50px, 1fr);
+        }
+      }
+      .btn {
+        margin: 20px 0;
+        height: 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    nav {
+      .btn {
+        width: 35vw;
+        padding: 5px 10px;
+        a {
+          font-size: calc(0.5rem + 1.5vw);
+        }
+      }
+    }
+  }
+}
