@@ -8,6 +8,8 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'cheap-eval-source-map',
   devServer: {
+    host: '192.168.0.171',
+    port: 8080,
     inline: true,
   },
   plugins: [
@@ -17,6 +19,11 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: Path.resolve(__dirname, '../src/index.html'),
+      inject: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'shopping-list.html',
+      template: Path.resolve(__dirname, '../src/shopping-list.html'),
       inject: false,
     }),
   ],

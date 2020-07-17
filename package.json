@@ -7,11 +7,6 @@
     "test": "jest",
     "lint": "lint-staged && pretty-quick --staged"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && pretty-quick --staged && jest"
-    }
-  },
   "lint-staged": {
     "src/**/*.js": [
       "eslint --fix"
