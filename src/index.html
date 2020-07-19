@@ -21,20 +21,6 @@
   </head>
 
   <body>
-    <!-- Start your project here-->
-    <!-- <div class="container">
-      <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
-        <div class="text-center">
-          <img
-            src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png"
-            style="width: 250px; height: 90px;"
-          />
-          <h5 class="pt-3">Thank you for using our product. We're glad you're with us.</h5>
-          <p class="pb-5">MDB Team</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- End your project here-->
     <header class="header container">
       <h1 class="header__text"><i class="fas fa-shopping-bag"></i> <span>Shopping</span>List</h1>
       <nav>
@@ -45,30 +31,37 @@
       </nav>
     </header>
     <main class="container">
-      <div class="message success">
-        <span>Your product was successfully added</span>
-        <i class="fas fa-times"></i>
+      <div class="message hidden">
+        <span></span>
+        <i class="fas fa-times" id="icon-close-message"></i>
       </div>
       <div class="content-wrapper">
         <h2>Add product</h2>
-        <form>
+        <form class="form" id="form">
           <div class="field">
             <label for="product">Name</label>
-            <input type="text" name="product" placeholder="Enter a name of product" />
+            <input
+              id="productName"
+              type="text"
+              name="product"
+              placeholder="Enter a name of product"
+            />
+            <span class="error">Error message</span>
           </div>
           <div class="field">
             <label for="product">Units / Weight</label>
             <div class="field__unitsOrWeight">
-              <input type="number" min="0" name="product" placeholder="0" />
-              <select name="" id="">
+              <input id="inputUnit" type="number" min="0" step="1" name="product" placeholder="0" />
+              <select name="unit" id="unit">
                 <option value="unit">Unit</option>
-                <option value="weight">Weight</option>
+                <option value="weight">Weight (kg / L)</option>
               </select>
             </div>
+            <span class="error">Error message</span>
           </div>
           <div class="select field">
             <label for="category">Select a category for Your product</label>
-            <select name="category">
+            <select name="category" id="categorySelect">
               <option value="" disabled selected>Choose a category</option>
               <optgroup label="Food">
                 <option value="Breakfast & Cereal">Breakfast & Cereal</option>
@@ -92,16 +85,20 @@
                 <option value="Pharmacy">Pharmacy</option>
               </optgroup>
             </select>
+            <span class="error">Error message</span>
           </div>
-          <button type="button" class="btn custom-button">
+          <button class="btn custom-button submit">
             Add product
           </button>
         </form>
       </div>
     </main>
+    <footer>
+      <div><span>© 2020</span>Dmytro Patalakha</div>
+    </footer>
   </body>
   <!-- Main js file -->
-  <script type="text/javascript" src="js/index.min.js"></script>
+  <script type="text/javascript" src="js/addItem.min.js"></script>
   <!-- Custom scripts -->
   <script type="text/javascript"></script>
 </html>

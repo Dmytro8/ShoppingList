@@ -40,18 +40,64 @@
       <nav>
         <button type="button" class="btn custom-button"><a href="index.html">Add item</a></button>
         <button type="button" class="btn custom-button">
-          <a href="shopping-list.html">Shopping list</a>
+          <a href="shopping-list.html">Your list</a>
         </button>
       </nav>
     </header>
     <main class="container">
-      <div>
+      <div class="content-wrapper">
         <h2>Your list</h2>
+        <div class="select field">
+          <label for="category">Filter category</label>
+          <select name="category" id="categorySelect">
+            <option value="All products" selected>All products</option>
+            <optgroup label="Food">
+              <option value="Breakfast & Cereal">Breakfast & Cereal</option>
+              <option value="Bread & Bakery">Bread & Bakery</option>
+              <option value="Dairy, Eggs & Cheese">Dairy, Eggs & Cheese</option>
+              <option value="Meat & Seafood">Meat & Seafood</option>
+              <option value="Beverages">Beverages</option>
+              <option value="Grains, Pasta & Sides">Grains, Pasta & Sides</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Cookies, Snacks & Candy">Cookies, Snacks & Candy</option>
+              <option value="Condiments/Spices & Bake">Condiments/Spices & Bake</option>
+              <option value="Canned Goods & Soups">Canned Goods & Soups</option>
+              <option value="Beer, Wine & Spirits">Beer, Wine & Spirits</option>
+            </optgroup>
+            <optgroup label="Others">
+              <option value="Paper Products">Paper Products</option>
+              <option value="Cleaning Supplies">Paper Products</option>
+              <option value="Health & Beauty">Health & Beauty</option>
+              <option value="Pet Care">Pet Care</option>
+              <option value="Pharmacy">Pharmacy</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="shoppingList"></div>
+        <div class="listFooter">
+          <div class="total">
+            <div>
+              <h5>Total count</h5>
+              <span id="totalCount">4</span>
+            </div>
+            <div>
+              <h5>Total weight <span>(kg / L)</span></h5>
+              <span id="totalWeight">3.500 kg</span>
+            </div>
+          </div>
+          <div class="generatePDF">
+            <button class="btn custom-button">Generate PDF</button>
+          </div>
+        </div>
       </div>
     </main>
+    <footer>
+      <div><span>© 2020</span>Dmytro Patalakha</div>
+    </footer>
   </body>
   <!-- Main js file -->
-  <script type="text/javascript" src="js/index.min.js"></script>
+  <script type="text/javascript" src="js/list.min.js"></script>
   <!-- Custom scripts -->
   <script type="text/javascript"></script>
 </html>
