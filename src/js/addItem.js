@@ -30,8 +30,10 @@ function submitForm(e) {
       (existProduct) => existProduct.name === productName.value.trim()
     );
     if (coincidence.length === 0) {
+      const capitalizedName =
+        productName.value.trim().charAt(0).toUpperCase() + productName.value.trim().slice(1);
       const product = {
-        name: productName.value.trim(),
+        name: capitalizedName,
         [unitSelect.options[unitSelect.selectedIndex].value]: unitInput.value,
         category: categorySelect.options[categorySelect.selectedIndex].value,
       };

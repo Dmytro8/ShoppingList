@@ -38,9 +38,6 @@ export const getProducts = () => {
   return products;
 };
 
-// Function to update shopping list
-export const updateProduct = () => {};
-
 // Function to delete product from shopping list
 export const deleteProduct = (e, setTotalCountOfProducts, setTotalWeightOfProducts) => {
   const products = getProducts();

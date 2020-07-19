@@ -1,4 +1,4 @@
-import { getProducts, deleteProduct } from './utils';
+import { getProducts, deleteProduct, fadeIn, fadeOut } from './utils';
 
 window.addEventListener('DOMContentLoaded', () => {
   const products = getProducts();
@@ -8,21 +8,70 @@ window.addEventListener('DOMContentLoaded', () => {
   reassignPointers();
 });
 
+let prevEditObject = null;
+let productNameBuffer = null;
+let newName = '';
+
 // Selectors
 const shoppingList = document.querySelector('.shoppingList');
 const categorySelect = document.getElementById('categorySelect');
 const totalCount = document.getElementById('totalCount');
 const totalWeight = document.getElementById('totalWeight');
+const editPanel = document.querySelector('.editPanel');
+const declineUpdate = document.getElementById('rejectUpdate');
+const editForm = document.getElementById('editForm');
 
 // Event listeners
 categorySelect.addEventListener('change', filterProducts);
+declineUpdate.addEventListener('click', (e) => handleDeclineUpdate(e));
+editForm.addEventListener('submit', (e) => handleAcceptUpdate(e));
 
 // Functions
+// Handle click action on Decline button in the edit panel
+function handleDeclineUpdate(e) {
+  e.preventDefault();
+  const editPanelProductInput = editPanel.children[1].children[0].children[1];
+  const editPanelSelect = editPanel.children[1].children[1].children[1];
+  fadeOut(editPanel);
+  editPanel.classList.add('hidden');
+  editPanelProductInput.removeAttribute('value');
+  editPanelSelect.firstElementChild.selected = true;
+  prevEditObject = null;
+  productNameBuffer = null;
+}
+
+// Handle click action on Accept button in the edit panel
+function handleAcceptUpdate(e) {
+  e.preventDefault();
+  const categorySelect = editPanel.children[1].children[1].children[1];
+  handleChangeSelect(categorySelect);
+  const productName = editPanel.children[1].children[0].children[1];
+
+  if (!checkError(productName) && !checkError(categorySelect)) {
+    const products = getProducts();
+    const editPanelSelect = editPanel.children[1].children[1].children[1];
+    const capitalizedName = newName.trim().charAt(0).toUpperCase() + newName.trim().slice(1);
+    const newProducts = products.map((product) => {
+      if (product.name === productNameBuffer) {
+        return {
+          ...product,
+          name: capitalizedName,
+          category: editPanelSelect.options[editPanelSelect.selectedIndex].value,
+        };
+      }
+      return product;
+    });
+    localStorage.setItem('products', JSON.stringify(newProducts));
+    renderProducts(newProducts);
+    reassignPointers();
+    handleDeclineUpdate(e);
+  }
+}
+
 // Filter products
 function filterProducts() {
   const products = getProducts();
   const selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
-
   if (selectedCategory === 'All products') {
     renderProducts(products);
     setTotalCountOfProducts(products);
@@ -44,7 +93,7 @@ function reassignPointers() {
 
   // Event listeners
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', handleCheckbox);
+    checkbox.addEventListener('click', handleCheckbox);
   });
   editButtons.forEach((editButton) => {
     editButton.addEventListener('click', handleEditAction);
@@ -57,16 +106,39 @@ function reassignPointers() {
   // Functions
   function handleCheckbox() {
     if (this.checked) {
-      // Checkbox is checked..
       this.parentElement.parentElement.classList.add('crossedOut');
     } else {
-      // Checkbox is not checked..
       this.parentElement.parentElement.classList.remove('crossedOut');
     }
   }
 
   function handleEditAction() {
-    console.log('handle edit click');
+    const descriptionDiv = this.parentElement.children[1];
+    const productName = descriptionDiv.children[0].innerHTML;
+    const editPanelProductInput = editPanel.children[1].children[0].children[1];
+    // const editPanelSelect = editPanel.children[1].children[1].children[1];
+    // const foodCategories = editPanel.children[1].children[1].children[1].children[1].children;
+    // const othersCategories = editPanel.children[1].children[1].children[1].children[2].children;
+    if (prevEditObject !== this && prevEditObject !== null) {
+      productNameBuffer = productName;
+      editPanelProductInput.value = productName;
+      newName = productName;
+      editPanelProductInput.addEventListener('change', (e) => {
+        newName = e.target.value;
+        handleChangeProductName(e.target.value, editPanelProductInput);
+      });
+    } else if (prevEditObject === null) {
+      productNameBuffer = productName;
+      fadeIn(editPanel, 'block');
+      editPanel.classList.remove('hidden');
+      editPanelProductInput.value = productName;
+      newName = productName;
+      editPanelProductInput.addEventListener('change', (e) => {
+        newName = e.target.value;
+        handleChangeProductName(e.target.value, editPanelProductInput);
+      });
+    }
+    prevEditObject = this;
   }
 }
 
@@ -103,8 +175,14 @@ function createProductDomElement(
   const checkboxDiv = document.createElement('div');
   const checkbox = document.createElement('input');
   checkbox.setAttribute('type', 'checkbox');
-  checkbox.classList.add('checkbox');
+  checkbox.classList.add('checkbox', 'styled-checkbox');
+  checkbox.setAttribute('id', 'styled-checkbox');
+  // const label = document.createElement('label');
+  // label.setAttribute('for', 'styled-checkbox');
+  // label.setAttribute('checked', false);
+  // label.classList.add('checkbox');
   checkboxDiv.appendChild(checkbox);
+  // checkboxDiv.appendChild(label);
 
   // Description of product div
   const descriptionDiv = document.createElement('div');
@@ -171,3 +249,44 @@ export const renderProducts = (products) => {
     }
   });
 };
+
+//---------------
+
+function handleChangeProductName(value, name) {
+  const allLetterRegex = /^([A-Za-z])+(\s)*([A-Za-z])*$/;
+  if (value === '') {
+    setError(name, '*The field cannot be blank');
+  } else if (!value.match(allLetterRegex)) {
+    setError(name, '*Enter alphabets only.');
+  } else removeError(name);
+}
+
+function handleChangeSelect(select) {
+  if (select.selectedIndex === 0) {
+    setError(select, '*You should select a category');
+  } else {
+    removeError(select);
+  }
+}
+
+function setError(element, message) {
+  element.classList.add('hasError');
+  const formControl = element.parentElement;
+  const spanError = formControl.querySelector('span');
+  spanError.style.display = 'block';
+  spanError.innerText = message;
+}
+
+function removeError(element) {
+  element.classList.remove('hasError');
+  const formControl = element.parentElement;
+  const spanError = formControl.querySelector('span');
+  spanError.style.display = 'none';
+}
+
+function checkError(element) {
+  if (element.classList.contains('hasError')) {
+    return true;
+  }
+  return false;
+}

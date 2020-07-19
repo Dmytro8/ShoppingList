@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>MDB Webpack Starter</title>
+    <title>Shopping list / Your list</title>
     <!-- Favicon -->
     <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
@@ -21,20 +21,6 @@
   </head>
 
   <body>
-    <!-- Start your project here-->
-    <!-- <div class="container">
-      <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
-        <div class="text-center">
-          <img
-            src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png"
-            style="width: 250px; height: 90px;"
-          />
-          <h5 class="pt-3">Thank you for using our product. We're glad you're with us.</h5>
-          <p class="pb-5">MDB Team</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- End your project here-->
     <header class="header container">
       <h1 class="header__text"><i class="fas fa-shopping-bag"></i> <span>Shopping</span>List</h1>
       <nav>
@@ -45,6 +31,57 @@
       </nav>
     </header>
     <main class="container">
+      <div class="editPanel hidden">
+        <h3>Edit product</h3>
+        <form id="editForm">
+          <div class="field">
+            <label for="product">Name</label>
+            <input
+              id="productName"
+              type="text"
+              name="product"
+              placeholder="Enter a name of product"
+            />
+            <span class="error">Error message</span>
+          </div>
+          <div class="select field">
+            <label for="category">Select a category for your product</label>
+            <select name="category" id="categoryEdit">
+              <option value="" disabled selected>Choose a category</option>
+              <optgroup label="Food">
+                <option value="Breakfast & Cereal">Breakfast & Cereal</option>
+                <option value="Bread & Bakery">Bread & Bakery</option>
+                <option value="Dairy, Eggs & Cheese">Dairy, Eggs & Cheese</option>
+                <option value="Meat & Seafood">Meat & Seafood</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Grains, Pasta & Sides">Grains, Pasta & Sides</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Cookies, Snacks & Candy">Cookies, Snacks & Candy</option>
+                <option value="Condiments/Spices & Bake">Condiments/Spices & Bake</option>
+                <option value="Canned Goods & Soups">Canned Goods & Soups</option>
+                <option value="Beer, Wine & Spirits">Beer, Wine & Spirits</option>
+              </optgroup>
+              <optgroup label="Others">
+                <option value="Paper Products">Paper Products</option>
+                <option value="Cleaning Supplies">Cleaning Supplies</option>
+                <option value="Health & Beauty">Health & Beauty</option>
+                <option value="Pet Care">Pet Care</option>
+                <option value="Pharmacy">Pharmacy</option>
+              </optgroup>
+            </select>
+            <span class="error">Error message</span>
+          </div>
+          <div>
+            <button id="rejectUpdate" class="btn">
+              Decline
+            </button>
+            <button id="acceptUpdate" class="btn">
+              Accept
+            </button>
+          </div>
+        </form>
+      </div>
       <div class="content-wrapper">
         <h2>Your list</h2>
         <div class="select field">
