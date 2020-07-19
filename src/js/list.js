@@ -126,9 +126,6 @@ function reassignPointers() {
     const descriptionDiv = this.parentElement.children[1];
     const productName = descriptionDiv.children[0].innerHTML;
     const editPanelProductInput = editPanel.children[1].children[0].children[1];
-    // const editPanelSelect = editPanel.children[1].children[1].children[1];
-    // const foodCategories = editPanel.children[1].children[1].children[1].children[1].children;
-    // const othersCategories = editPanel.children[1].children[1].children[1].children[2].children;
     if (prevEditObject !== this && prevEditObject !== null) {
       productNameBuffer = productName;
       editPanelProductInput.value = productName;
@@ -187,12 +184,7 @@ function createProductDomElement(
   checkbox.setAttribute('type', 'checkbox');
   checkbox.classList.add('checkbox', 'styled-checkbox');
   checkbox.setAttribute('id', 'styled-checkbox');
-  // const label = document.createElement('label');
-  // label.setAttribute('for', 'styled-checkbox');
-  // label.setAttribute('checked', false);
-  // label.classList.add('checkbox');
   checkboxDiv.appendChild(checkbox);
-  // checkboxDiv.appendChild(label);
 
   // Description of product div
   const descriptionDiv = document.createElement('div');
