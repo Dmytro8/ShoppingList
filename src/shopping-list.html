@@ -22,7 +22,9 @@
 
   <body>
     <header class="header container">
-      <h1 class="header__text"><i class="fas fa-shopping-bag"></i> <span>Shopping</span>List</h1>
+      <h1 id="header__title" class="header__text">
+        <i class="fas fa-shopping-bag"></i> <span>Shopping</span>List
+      </h1>
       <nav>
         <button type="button" class="btn custom-button"><a href="index.html">Add item</a></button>
         <button type="button" class="btn custom-button">
@@ -111,7 +113,7 @@
             </optgroup>
           </select>
         </div>
-        <div class="shoppingList"></div>
+        <div id="shoppingList" class="shoppingList"></div>
         <div class="listFooter">
           <div class="total">
             <div>
@@ -124,7 +126,7 @@
             </div>
           </div>
           <div class="generatePDF">
-            <button class="btn custom-button">Generate PDF</button>
+            <button id="buttonPdf" class="btn custom-button">Generate PDF</button>
           </div>
         </div>
       </div>

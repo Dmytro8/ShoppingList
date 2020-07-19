@@ -1,3 +1,5 @@
+import jsPDF from 'jspdf';
+
 import { getProducts, deleteProduct, fadeIn, fadeOut } from './utils';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -20,13 +22,21 @@ const totalWeight = document.getElementById('totalWeight');
 const editPanel = document.querySelector('.editPanel');
 const declineUpdate = document.getElementById('rejectUpdate');
 const editForm = document.getElementById('editForm');
+const generatePdfButton = document.getElementById('buttonPdf');
 
 // Event listeners
 categorySelect.addEventListener('change', filterProducts);
 declineUpdate.addEventListener('click', (e) => handleDeclineUpdate(e));
 editForm.addEventListener('submit', (e) => handleAcceptUpdate(e));
+generatePdfButton.addEventListener('click', handleGeneratePdfAction);
 
 // Functions
+function handleGeneratePdfAction() {
+  const doc = new jsPDF();
+  doc.fromHTML(shoppingList, 20, 20, { width: 500 });
+  doc.save('Shopping-list.pdf');
+}
+
 // Handle click action on Decline button in the edit panel
 function handleDeclineUpdate(e) {
   e.preventDefault();
